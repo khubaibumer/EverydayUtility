@@ -291,3 +291,39 @@ enum {
 	})
 
 #endif /*	__SOCKET_UTILITY__	*/
+
+#ifndef __STRING_UTILITY__
+#define __STRING_UTILITY__
+
+#define STR_TO_LOWERCASE(_STR, _LEN)									\
+	({												\
+		for(int i = 0; i < _LEN; i++)								\
+			*(_STR + i) = tolower(*(_STR + i));						\
+	})
+
+#define STR_TO_UPPERCASE(_STR, _LEN)									\
+	({												\
+		for(int i = 0; i < _LEN; i++)								\
+			*(_STR + i) = toupper(*(_STR + i));						\
+	})
+
+#define IS_ALPHA_NUMERIC(_STR, _LEN)									\
+	({												\
+		int res = 0;										\
+		for(int i = 0; i < _LEN && res == 0; i++)						\
+			if(isdigit(*(_STR + i)))							\
+				res = 1;								\
+		(res);											\
+	})
+
+#define STR_FROM_NUM(_BUFF, _FMT, _VAL)									\
+	({												\
+		assert(_FMT != NULL);									\
+		int offset = 0;										\
+		offset = sprintf(_BUFF, _FMT, _VAL);							\
+		assert(offset != -1);									\
+		(offset + 1);										\
+	})
+
+#endif /*	__STRING_UTILITY__	*/
+
