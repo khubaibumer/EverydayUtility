@@ -1,10 +1,6 @@
 #ifndef __CONTAINER_H__
 #define __CONTAINER_H__
 
-#ifndef EXPORT_SYMBOL
- #define EXPORT_SYMBOL(x)
-#endif	/*	EXPORT_SYMBOL	*/
-
 #ifndef __KERNEL__	///< Make Compatible with LKM
  #define kmalloc(x, y) calloc(1, x)
  #define kfree(x) free(x)
@@ -33,7 +29,6 @@ typedef struct data_node {
 	({																	\
 		(data_node_t*) (*head) == NULL ? 1 : 0;							\
 	})
-EXPORT_SYMBOL(is_empty_node);
 
 /*	Find Data in list		*/
 #define find_node(head, _data, len)										\
@@ -47,7 +42,6 @@ EXPORT_SYMBOL(is_empty_node);
 		}																\
 		(node);															\
 	})
-EXPORT_SYMBOL(find_node);
 
 /*		Find Data in List on some offset		*/
 #define find_node_field(_head, _key, _offset, _len)						\
@@ -73,7 +67,6 @@ EXPORT_SYMBOL(find_node);
 		*head = node;													\
 		(*head);														\
 	})
-EXPORT_SYMBOL(insert_node);
 
 /*		Delete Data top of stack		*/
 #define delete_node(_head, _node)												\
@@ -92,7 +85,6 @@ EXPORT_SYMBOL(insert_node);
 			kfree(node);														\
 		} while(0);																\
 	})
-EXPORT_SYMBOL(delete_node)
 
 /*		Delete a complete List		*/
 #define delete_list_(_head)														\
@@ -107,7 +99,6 @@ EXPORT_SYMBOL(delete_node)
 			}																	\
 		} while(0);																\
 	})
-EXPORT_SYMBOL(delete_list);
 
 /*		foreach_node_callback register		*/
 /*		void (*callback_f)(data_node_t*)	*/
@@ -124,6 +115,5 @@ EXPORT_SYMBOL(delete_list);
 			}																	\
 		} while(0);																\
 	})
-EXPORT_SYMBOL(foreach_node_callback)
 
 #endif /*	__CONTAINER_H__	*/
