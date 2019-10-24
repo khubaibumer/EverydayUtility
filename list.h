@@ -49,6 +49,18 @@ EXPORT_SYMBOL(is_empty_node);
 	})
 EXPORT_SYMBOL(find_node);
 
+/*		Find Data in List on some offset		*/
+#define find_node_field(_head, _key, _offset, _len)						\
+	({																	\
+		data_node_t *node = (data_node_t*) *_head;						\
+		while(node != NULL) {											\
+			if(memcmp(node->data + _offset, _key, _len) == 0)			\
+				break;													\
+			node = node->next;											\
+		}																\
+		(node);															\
+	})
+
 /*		Insert Data at the top of stack		*/
 #define insert_node(head, _data)										\
 	({																	\
