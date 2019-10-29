@@ -1,5 +1,17 @@
+/**
+ * @file   list.h
+ * @author Muhammad Khubaib Umer
+ * @date   25 October 2019
+ * @version 1.0
+ * @brief   Macro Based Doubly-Linked List (Stack)
+ */
+
 #ifndef __CONTAINER_H__
 #define __CONTAINER_H__
+
+#ifndef EXPORT_SYMBOL
+ #define EXPORT_SYMBOL(x)
+#endif	/*	EXPORT_SYMBOL	*/
 
 #ifndef __KERNEL__	///< Make Compatible with LKM
  #define kmalloc(x, y) calloc(1, x)
@@ -7,13 +19,11 @@
 #else
  #define disable_page_protection()										\
 	({																	\
-		LOGA("%s", "Page Protection Disabled");							\
 		write_cr0(read_cr0() & (~0x10000));								\
 	})
  #define enable_page_protection()										\
 	({																	\
-		LOGA("%s", "Page Protection Enabled");							\
-		write_cr0(read_cr0() | (~0x10000));								\
+		write_cr0(read_cr0() | (0x10000));								\
 	})
 
 #endif	/*	__KERNEL__	*/
@@ -87,7 +97,7 @@ typedef struct data_node {
 	})
 
 /*		Delete a complete List		*/
-#define delete_list_(_head)														\
+#define delete_list(_head)														\
 	({																			\
 		data_node_t *_head_ = (data_node_t*) *_head;							\
 		do{																		\
